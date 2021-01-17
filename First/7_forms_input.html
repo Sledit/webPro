@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form表单</title>
+</head>
+<body>
+    <!-- 与后端交互时用的比较多 -->
+    <form action="process.php">
+        <!-- action  将表单中的内容提交去的地方，此处假定 process.php 即为一个后端服务器
+                例如，网站登录，用户所输入的信息
+        -->
+        <div>
+            <!-- label input button 都是行内标签 -->
+            <!-- 文本 可展示的 -->
+            <label for="name">用户名:</label>
+             <!-- for 属性 与后边的输入框相关联，input中的id值与for中的值保持一致，则鼠标点击label时，输入框会高亮 -->
+        
+            <!-- 输入框 -->
+            <input type="text" name="name" id="name" value="sledit" placeholder="请输入用户名" />
+            <!-- 
+                 type         输入的类型 
+                 name         后端拿取用户输入的值所需要的属性
+                 value        缺省的值
+                 placeholder  提醒文字
+            -->
+            </div>
+        <div>
+            <label for="email">邮箱:</label>
+            <input type="email" name="email" id="email" placeholder="请输入邮箱" />
+        </div>  
+    
+        <!-- textatea -->
+        <!-- 可输入的信息更多
+             cols  列数
+             rows  行数
+             一般用作网站留言
+        -->
+        <div>
+            <label for="message">信息:</label>
+            <textarea name="message" id="message" cols="30" rows="10"></textarea>
+        </div> 
+
+        <!-- number 
+             type为number时，input尾端会有一个加减器，且无法输入除数字外的其他字符
+        -->
+        <div>
+            <label for="age">年龄:</label>
+            <input type="number" name="age" id="age" />
+        </div>
+
+        <!-- date -->
+        <div>
+            <label for="brithday">生日:</label>
+            <input type="date" name="brithday" id="brithday" />
+        </div>
+
+        <!-- select 下拉选择
+             内接option标签，写可选项，value值交到select的name中，最后提交到后端
+             缺省显示option中的第一个
+        -->
+        <div>
+            <label for="sex">性别:</label>
+            <select name="sex" id="sex">
+                <option value="man">男</option>
+                <option value="female">女</option>
+            </select>
+        </div>
+
+        <!-- radio 单选框 -->
+        <div>
+            <label for="membership">单选</label>
+            <input type="radio" name="membership" id="membership" value="vue" />vue
+            <input type="radio" name="membership" id="membership" value="react" />react
+            <input type="radio" name="membership" id="membership" value="angular" />angular
+        </div>
+
+        <!-- checkbox 多选框 -->
+        <div>
+            <label for="membership">多选</label>
+            <input type="checkbox" name="membership" id="membership" value="vue" />vue
+            <input type="checkbox" name="membership" id="membership" value="react" />react
+            <input type="checkbox" name="membership" id="membership" value="angular" />angular
+        </div>
+
+        <!-- submit 最后将信息提交到form中的action所写的后端地址 -->
+        <!-- 若type为button 需要绑定js函数才能实现功能，submit可自动提交 -->
+        <div>
+            <input type="submit" value="提交" />
+        </div>
+
+        <!-- button中的reset 重置 -->
+        <button type="reset">重置</button>
+
+    </form>
+</body>
+</html>

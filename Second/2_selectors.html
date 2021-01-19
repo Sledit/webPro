@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS选择器</title>
+    <style>
+        /* 标签选择器 */
+        body {
+            background-color: #333;
+        }
+        h1 {
+            color: white;
+        }
+        /* id选择器 */
+        #blue-heading {
+            color: blue;
+        }
+        /* 类选择器 */
+        .green-heading {
+            color: green;
+        }
+        #welcome {
+            background-color: #f4f4f4;
+        }
+        /* 多选择器 */
+        #welcome,#about {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 5px;
+        }
+        /* 嵌套选择器 */
+        #welcome p {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>种类</h1>
+    <div id="welcome">
+        <h2 id="blue-heading">二锅头</h2>
+        <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet magni, repudiandae, voluptatibus explicabo provident quam
+             vero ullam ipsam quasi voluptate id quibusdam error doloremque harum minima libero veritatis ea ut.
+        </p>
+    </div>
+    <div id="about">
+        <h2 class="green-heading">伏特加</h2>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+            Magni iusto odit praesentium repudiandae sapiente exercitationem, vero laborum tempore non illum.
+        </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字体</title>
+    <style>
+
+        /* CSS 中的单位
+            绝对单位 cm mm  in （英寸） = 2.54厘米
+            px （像素） = 0.04厘米  pt （镑） = 1/72英寸
+            相对单位
+            % 取决于父级元素
+            em 取决于父级元素
+            rem 取决于根元素
+            vw 视点的百分之一宽
+            vh 视点的百分之一高
+        */
+
+        body {
+            /* 英文字体 */
+            /* font-family: Arial, Helvetica, sans-serif; */
+            /* 中文字体 */
+            font-family: '微软雅黑';
+            /* font-family: '宋体'; */
+
+            /* 字体大小 */
+            /* 默认 16px */
+            font-size: 16px;
+
+            /* 行高 */
+            line-height: 1.8em;
+        }
+
+        #welcome p span {
+            color: blue;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>种类</h1>
+    <div id="welcome">
+        <h2 id="blue-heading">二锅头</h2>
+        <p>
+            Lorem ipsum dolor, sit <span>Lorem ipsum dolor sit amet.</span> amet consectetur adipisicing elit. Amet magni, repudiandae, voluptatibus explicabo provident quam
+             vero ullam ipsam quasi voluptate id quibusdam error doloremque harum minima libero veritatis ea ut.
+        </p>
+    </div>
+    <div id="about">
+        <h2 class="green-heading">伏特加</h2>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+            Magni iusto odit praesentium repudiandae sapiente exercitationem, vero laborum tempore non illum.
+        </p>
+    </div>
+</body>
+</html>

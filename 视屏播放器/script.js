@@ -1,64 +1,65 @@
-const container = document.querySelector('.container');
-const seats = document.querySelectorAll('.row .seat:not(.occupied)');
-const count = document.getElementById('count');
-const total = document.getElementById('total');
-const movieSelect = document.getElementById('movie');
-let ticketPrice = Number(movieSelect.value);
+// 获取节点
+const video = document.getElementById("video");
+const play = document.getElementById("play");
+const stop = document.getElementById("stop");
+const progress = document.getElementById("progress");
+const timestamp = document.getElementById("timestamp");
 
-populateUI();
-
-// 更新座位数及总票价
-function undateSeletedCount() {
-    const selectedSeats = document.querySelectorAll('.row .seat.selected');
-
-    const seatsIndex = [...selectedSeats].map(seat => {
-        return [...seats].indexOf(seat);
-    });
-
-    localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
-
-    const selectedSeatsCount = selectedSeats.length;
-    count.innerText = selectedSeatsCount;
-    total.innerText = selectedSeatsCount * ticketPrice;
+// 点击播放或者暂停
+function toggleVideoStatus() {
+  if (video.paused) {
+    video.play();
+  } else {
+    video.pause();
+  }
 }
 
-// 保存电影索引值与票价
-function setMovieData(movieIndex, moviePrice) {
-    localStorage.setItem('selectedMovieIndex', movieIndex);
-    localStorage.setItem('selectedMoviePrice', moviePrice);
+// 点击video图标更新
+function updatePlayIcon() {
+  if (video.paused) {
+    play.innerHTML = '<i class="fa fa-play fa-2x"></i>';
+  } else {
+    play.innerHTML = '<i class="fa fa-pause fa-2x"></i>';
+  }
 }
- 
-// 获取本地下拉框事件监听
-function populateUI() {
-    const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
-    if (selectedSeats !== null && selectedSeats.length > 0) {
-        seats.forEach((seat, index) => {
-            if (selectedSeats.indexOf(index) > -1) {
-                seat.classList.add("selected");
-            }
-        });
-    }
 
-    const selectedMovieIndex = localStorage.getItem('selectedMovieIndex');
-    if (selectedMovieIndex !== null) {
-        movieSelect.selectdeIndex = selectedMovieIndex;
-     }
- }
+// 点击video更新进度条和时间戳
+function updateProgress() {
+  //   console.log(video.currentTime);
+  //   console.log(video.duration);
+  progress.value = (video.currentTime / video.duration) * 100;
 
-// 电影下拉框事件监听
-movieSelect.addEventListener('change', e => {
-    ticketPrice = Number(e.target.value);
-    setMovieData(e.target.selectdeIndex, e.target.value);
-    undateSeletedCount();
-});
+  // 获取分钟数
+  let mins = Math.floor(video.currentTime / 60);
+  if (mins < 10) {
+    mins = "0" + String(mins);
+  }
 
-// 座位点击事件
-container.addEventListener('click', e => {
-    if (e.target.classList.contains('seat') && !e.target.classList.contains('occupied')) {
-        e.target.classList.toggle('selected');
-        undateSeletedCount();
-     }
-})
+  //  获取秒数
+  let secs = Math.floor(video.currentTime % 60);
+  if (secs < 10) {
+    secs = "0" + String(secs);
+  }
 
-// 设置初始座位和总票价
-undateSeletedCount();
+  timestamp.innerHTML = `${mins}:${secs}`;
+}
+
+// 停止视频
+function stopVideo() {
+  video.currentTime = 0;
+  video.pause();
+}
+
+// 拖动进度条的时候改变播放内容和时间戳
+function setVideoProgress() {
+  video.currentTime = (+progress.value * video.duration) / 100;
+}
+// 添加事件监听
+video.addEventListener("click", toggleVideoStatus);
+video.addEventListener("pause", updatePlayIcon);
+video.addEventListener("play", updatePlayIcon);
+video.addEventListener("timeupdate", updateProgress);
+
+play.addEventListener("click", toggleVideoStatus);
+stop.addEventListener("click", stopVideo);
+progress.addEventListener("change", setVideoProgress);

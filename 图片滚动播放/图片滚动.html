@@ -1,0 +1,141 @@
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Title</title>
+ <style>
+  *{
+   margin: 0;
+   padding: 0;
+  }
+  #div1{
+   width: 640px;
+   height: 120px;
+   margin: 100px auto;
+   background-color: #646464;
+   position: relative;
+   overflow: hidden;
+  }
+  #div1 ul{
+   position:absolute;
+   left:0;
+   top:0;
+   overflow: hidden;
+   background-color: #3b7796;
+  }
+ 
+  #div1 ul li{
+   float: left;
+   width: 160px;
+   height: 120px;
+   list-style: none;
+  }
+ </style>
+ 
+ <script>
+
+/*
+    *******此处注释********转载自**********飞翔在蓝天下的蜂鸟*********************
+     ****** 元素视图属性
+     * offsetWidth 水平方向 width + 左右padding + 左右border-width
+     * offsetHeight 垂直方向 height + 上下padding + 上下border-width
+     * 
+     * clientWidth 水平方向 width + 左右padding
+     * clientHeight 垂直方向 height + 上下padding
+     * 
+     * offsetTop 获取当前元素到 定位父节点 的top方向的距离
+     * offsetLeft 获取当前元素到 定位父节点 的left方向的距离
+     * 
+     * scrollWidth 元素内容真实的宽度，内容不超出盒子高度时为盒子的clientWidth
+     * scrollHeight 元素内容真实的高度，内容不超出盒子高度时为盒子的clientHeight
+     * 
+     ****** 元素视图属性结束
+     * 
+     ****** Window视图属性（低版本IE浏览器[<IE9]不支持） 【自测包含滚动条，但网络教程都说不包含？？？】
+     * innerWidth 浏览器窗口可视区宽度（不包括浏览器控制台、菜单栏、工具栏） 
+     * innerHeight 浏览器窗口可视区高度（不包括浏览器控制台、菜单栏、工具栏）
+     * ***** Window视图属性结束
+     * 
+     ****** Document文档视图
+     * （低版本IE的innerWidth、innerHeight的代替方案）
+     * document.documentElement.clientWidth 浏览器窗口可视区宽度（不包括浏览器控制台、菜单栏、工具栏、滚动条）
+     * document.documentElement.clientHeight 浏览器窗口可视区高度（不包括浏览器控制台、菜单栏、工具栏、滚动条）
+     * 
+     * document.documentElement.offsetHeight 获取整个文档的高度（包含body的margin）
+     * document.body.offsetHeight 获取整个文档的高度（不包含body的margin）
+     * 
+     * document.documentElement.scrollTop 返回文档的滚动top方向的距离（当窗口发生滚动时值改变）
+     * document.documentElement.scrollLeft 返回文档的滚动left方向的距离（当窗口发生滚动时值改变）
+     ****** Document文档视图结束
+     * 
+     ****** 元素方法
+     * 1. getBoundingClientRect() 获取元素到body
+     *  bottom: 元素底边（包括border）到可视区最顶部的距离
+     *  left: 元素最左边（不包括border）到可视区最左边的距离
+     *  right: 元素最右边（包括border）到可视区最左边的距离
+     *  top: 元素顶边（不包括border）到可视区最顶部的距离
+     *  height: 元素的offsetHeight
+     *  width: 元素的offsetWidth
+     *  x: 元素左上角的x坐标 
+     *  y: 元素左上角的y坐标 
+     * 
+     * 2. scrollIntoView() 让元素滚动到可视区
+     * 
+     * ***** 元素方法结束
+     * 
+*/
+  window.onload = function(){
+   var oDiv = document.getElementById('div1');
+   var oUl = document.getElementById('ul1');
+   var speed = 2;//初始化速度
+ 
+   oUl.innerHTML += oUl.innerHTML;//图片内容*2
+   var oLi= document.getElementsByTagName('li');
+   oUl.style.width = oLi.length*160+'px';//设置ul的宽度使图片可以放下
+ 
+   var oBtn1 = document.getElementById('btn1');
+   var oBtn2 = document.getElementById('btn2');
+ 
+ 
+   function move(){
+    if(oUl.offsetLeft<-(oUl.offsetWidth/2)){//向左滚动，当靠左的图4移出边框时
+     oUl.style.left = 0;
+    }
+ 
+    if(oUl.offsetLeft > 0){//向右滚动，当靠右的图1移出边框时
+     oUl.style.left = -(oUl.offsetWidth/2)+'px';
+    }
+ 
+    oUl.style.left = oUl.offsetLeft + speed + 'px';
+   }
+ 
+   oBtn1.addEventListener('click',function(){
+    speed = -2;
+   },false);
+   oBtn2.addEventListener('click',function(){
+    speed = 2;
+   },false);
+ 
+   var timer = setInterval(move,30);//全局变量 ，保存返回的定时器
+ 
+   oDiv.addEventListener('mouseout', function () {
+    timer = setInterval(move,30);
+   },false);
+   oDiv.addEventListener('mousemove', function () {
+    clearInterval(timer);//鼠标移入清除定时器
+   },false);
+  }
+ </script>
+</head>
+<body>
+ <input id="btn1" type="button" value="向左">
+ <input id="btn2" type="button" value="向右">
+ <div id="div1">
+  <ul id="ul1">
+   <li><img src="img/img1.jpg"></li>
+   <li><img src="img/img2.jpg"></li>
+   <li><img src="img/img3.jpg"></li>
+   <li><img src="img/img4.jpg"></li>
+  </ul>
+ </div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<div id="div_2">
+    <img id="img1" src="img/img1.jpg" onmouseout="dongtupian()" onmouseover="stoptupian()">
+    <ul id="ul1">
+        <li id="li1" onmouseover="tingtupian(1,this)" onmouseout="jixu()"></li>
+        <li id="li2" onmouseover="tingtupian(2,this)" onmouseout="jixu()"></li>
+        <li id="li3" onmouseover="tingtupian(3,this)" onmouseout="jixu()"></li>
+    </ul>
+</div>
+
+<style type="text/css">   
+    #img1{
+        width: 512px;
+        height: 250px;
+    }
+    ul{
+        list-style: none;
+    }
+</style>
+
+<script type="text/javascript">
+    var n=1;//图片标记数
+    var dingshiqi;//让图片动的定时器
+    window.onload=init;
+    function init(){
+        dingshiqi=window.setInterval("tupian()",1000);
+        beijing=document.getElementById("li1");
+    }
+    //换图片函数
+    function tupian(){			
+        var obj=document.getElementById("img1");
+        n++;
+        if(n>=4){
+            n=1;
+        }
+        obj.src="img/img"+n+".jpg";
+        for(var i=1;i<=3;i++){
+            var li1=document.getElementById("li"+i);
+        }
+        beijing=document.getElementById("li"+n);
+    }
+    //鼠标放上停止图片的函数
+    function stoptupian(){
+        window.clearInterval(dingshiqi);
+    }
+    //鼠标离开图片继续动的函数
+    function dongtupian(){
+        dingshiqi=window.setInterval("tupian()",1000);
+    }
+    //鼠标放到li上停止图片查看指定的图片
+    function tingtupian(i,lin){
+        //获得id为img1这个标签
+        var obj=document.getElementById("img1");
+        //改变对象的src属性换图片
+        n=i;
+        obj.src="img/img"+n+".jpg";
+        //清除定时器
+        window.clearInterval(dingshiqi);
+        huanbeijing(lin);
+    }
+    //让定时器继续换图片
+    function jixu(){
+        dingshiqi=window.setInterval("tupian()",1000);
+    }
+    function huanbeijing(lin){
+        for(var m=1;m<=3;m++){
+            var li1=document.getElementById("li"+m);
+        }
+    }
+</script>
+
+</body>
+</html>
